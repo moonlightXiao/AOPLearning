@@ -9,20 +9,16 @@ import java.lang.reflect.Method;
 import cn.exercise.patten.proxy.RealSubject;
 
 /**
- * 相当于AOP中的Aspect
- *
+ *	自定义InvocationHandler
  */
 public class JdkProxySubject implements InvocationHandler{
 	
-	private RealSubject realSubject;
+	private RealSubject realSubject; // 目标对象
 	
 	public JdkProxySubject(RealSubject realSubject) {
 		this.realSubject = realSubject;
 	}
-
-	/**
-	 * 相当于动态代理的逻辑 ，利用反射动态处理方法；（基于方法的方式，这是动态和静态代理的区别）
-	 */
+	
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		System.out.println("--- jdkProxy before ---");

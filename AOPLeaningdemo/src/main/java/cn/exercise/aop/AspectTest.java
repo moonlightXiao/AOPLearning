@@ -17,8 +17,6 @@ public class AspectTest {
 
 	@Before("adminOnly()")
 	public void before() {
-		System.out.println("----------");
-		System.out.println("@Aspect ###before");
-		System.out.println("----------");
+		System.out.println("------------ @Aspect ###before");
 	}
 }

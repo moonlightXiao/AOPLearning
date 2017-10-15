@@ -5,6 +5,9 @@ import java.lang.reflect.Method;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
+/**
+ * 织入代码类
+ */
 public class DemoMethodInterceptor implements MethodInterceptor{
 
 	@Override

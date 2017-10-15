@@ -1,5 +1,8 @@
 package cn.exercise.patten.proxy;
 
+/**
+ *	真实目标类 
+ */
 public class RealSubject implements Subject{
 
 	@Override
