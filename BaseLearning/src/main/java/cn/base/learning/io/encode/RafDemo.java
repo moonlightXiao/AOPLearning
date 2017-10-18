@@ -53,5 +53,7 @@ public class RafDemo {
 		for (byte b : buf) {
 			System.out.print(Integer.toHexString(b & 0xff) + " ");
 		}
+		
+		raf.close(); // 读写完后一定要关闭！！
 	}
 }
