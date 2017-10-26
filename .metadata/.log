@@ -1,0 +1,39 @@
+!SESSION 2017-10-15 08:58:49.064 -----------------------------------------------
+eclipse.buildId=3.8.0.201606301029-RELEASE-e46
+java.version=1.8.0_51
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-15 09:06:49.756
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-10-15 09:06:49.787
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.egit.ui 2 0 2017-10-15 09:06:54.771
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Smile'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.wst.common.project.facet.core 4 0 2017-10-15 09:13:35.013
+!MESSAGE Project facet grails.app has not been defined. It is used in plugin com.vmware.vfabric.ide.eclipse.tcserver.core.
+
+!ENTRY org.eclipse.egit.core 4 0 2017-10-15 09:17:52.034
+!MESSAGE An exception occurred during push on URI https://github.com/moonlightXiao/AOPLearning.git: https://github.com/moonlightXiao/AOPLearning.git: cannot open git-receive-pack
+!STACK 0
+org.eclipse.jgit.errors.TransportException: https://github.com/moonlightXiao/AOPLearning.git: cannot open git-receive-pack
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:510)
+	at org.eclipse.jgit.transport.TransportHttp.openPush(TransportHttp.java:379)
+	at org.eclipse.jgit.transport.PushProcess.execute(PushProcess.java:155)
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1250)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:189)
+	at org.eclipse.egit.ui.internal.push.ConfirmationPage$2.run(ConfirmationPage.java:209)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Caused by: java.net.ConnectException: Connection time out: github.com
+	at org.eclipse.jgit.util.HttpSupport.response(HttpSupport.java:197)
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:461)
+	... 6 more
