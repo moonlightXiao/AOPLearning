@@ -29,7 +29,7 @@ public class TCPServerMulConnection {
 				socket = serverSocket.accept();
 				// 创建一个新的线程
 				ServerThreadHelper serverThread = new ServerThreadHelper(socket);
-				//serverThread.setPriority(4); //可设置线程优先级（优先级默认为5，数字越小，优先级越低）
+				//serverThread.setPriority(4); //可设置线程优先级（优先级默认为5，数字越小，优先级越低；未设置优先级可能导致运行时速度非常慢，可适当降低）
 				// 启动线程
 				serverThread.start();
 				count++; // 统计客户端的数量
