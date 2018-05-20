@@ -1,59 +1,88 @@
 package resource.java.ordinary.mul.thread;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+
+/**
+ * çº¿ç¨‹Demo
+ * 
+ * @author xiao
+ */
 public class TranditionThread {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		/*
-		 * ´´½¨Ïß³ÌµÄ·½·¨Ò»£º
+		 * åˆ›å»ºçº¿ç¨‹çš„æ–¹æ³•ä¸€ï¼š
 		 */
-		Thread thread = new Thread(){
+		Thread thread = new Thread() {
 			@Override
 			public void run() {
-//				excuMethod(1);
+				// excuMethod(1);
 			}
 		};
 		thread.start();
-		
+
 		/*
-		 * ´´½¨Ïß³Ì·½·¨¶ş£º
+		 * åˆ›å»ºçº¿ç¨‹æ–¹æ³•äºŒï¼š
 		 */
 		Thread thread2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-//				excuMethod(2);
+				// excuMethod(2);
 			}
 		});
 		thread2.start();
-		
+
 		/*
-		 * Õâ¸ö·½·¨µÄ½á¹¹ÊÇÕâÑùµÄ£º
-		 * 	new Thread( Runnable.run(){
-		 * 		// ±êÊ¶Îª3µÄÏß³Ì
-		 *  }){ 
-		 * 		run(){
-		 * 		// ±êÊ¶Îª4µÄÏß³Ì
-		 * }}.start();
-		 * Ë¼¿¼£º´Ë·½·¨ÔËĞĞµÄÊÇexcuMethod(3)·½·¨»¹ÊÇexcuMethod(4)·½·¨??
+		 * åˆ›å»ºçº¿ç¨‹æ–¹æ³•ä¸‰ï¼š
+		 */
+		// FutureTaskæ˜¯ä¸€ä¸ªåŒ…è£…å™¨ï¼Œå®ƒé€šè¿‡æ¥å—Callableæ¥åˆ›å»ºï¼Œå®ƒåŒæ—¶å®ç°äº†Â Futureå’ŒRunnableæ¥å£ã€‚
+		FutureTask<String> ft = new FutureTask<String>(new Callable<String>() {
+
+			@Override
+			public String call() throws Exception {
+//				excuMethod(3);
+				System.out.println("hi~~ æ­¤å¤„æœ‰ä¸ªæ–°çº¿ç¨‹");
+				return "FutureTask è¿”å›something";
+			}
+		});
+		Thread t3 = new Thread(ft);
+		t3.start();
+		String result = ft.get();
+		System.out.println(result);// è¾“å‡º: FutureTask è¿”å›something
+
+		/*
+		 * é—®é¢˜ï¼šæ­¤æ–¹æ³•è¿è¡Œçš„æ˜¯excuMethod(4)æ–¹æ³•è¿˜æ˜¯excuMethod(5)æ–¹æ³•??
 		 * 
-		 * ´ğ°¸£ºÔËĞĞ±êÊ¶Îª4µÄÏß³Ì¡£
-		 * Ô­Òò£ºÔÚThread.classÖĞ£¬ThreadÊÇÊµÏÖÁËRunnable½Ó¿ÚµÄ¡£ÔÚÔËĞĞÁËThread.start()·½·¨ºó£¬ÏÈÔÚ×ÓÀàÖĞÕÒrun()·½·¨£¬ÕÒµ½ÔòÓÃ×ÓÀàµÄ·½·¨£¬ÕÒ²»µ½ÔÚÓÃ¸¸ÀàµÄ·½·¨¡£
-		 * 		 ÔÚÕâÌâÖĞ£¬±êÊ¶Îª4µÄÏß³ÌËùÔÚµÄrun()·½·¨ÒÑ¾­ÖØĞ´ÁË¸¸ÀàµÄ·½·¨£¬ËùÒÔ×îÖÕÔËĞĞµÄÊÇexcuMethod(4)·½·¨¡£
+		æ€è€ƒï¼šè¿™ä¸ªæ–¹æ³•çš„ç»“æ„æ˜¯è¿™æ ·çš„ï¼š 
+		new Thread( Runnable.run(){ 
+			// æ ‡è¯†ä¸º4çš„çº¿ç¨‹ 
+		}){ run(){ 
+			// æ ‡è¯†ä¸º5çš„çº¿ç¨‹ }
+		}.start(); 
+			
+		 * 
+		 * ç­”æ¡ˆï¼šè¿è¡Œæ ‡è¯†ä¸º5çš„çº¿ç¨‹ã€‚
+		 * åŸå› ï¼šåœ¨Thread.classä¸­ï¼ŒThreadæ˜¯å®ç°äº†Runnableæ¥å£çš„ã€‚åœ¨è¿è¡Œäº†Thread.start()æ–¹æ³•åï¼Œ
+		 * å…ˆåœ¨å­ç±»ä¸­æ‰¾run()æ–¹æ³•ï¼Œæ‰¾åˆ°åˆ™ç”¨å­ç±»çš„æ–¹æ³•ï¼Œæ‰¾ä¸åˆ°åœ¨ç”¨çˆ¶ç±»çš„æ–¹æ³•ã€‚
+		 * åœ¨è¿™é¢˜ä¸­ï¼Œæ ‡è¯†ä¸º5çš„çº¿ç¨‹æ‰€åœ¨çš„run()æ–¹æ³•å·²ç»é‡å†™äº†çˆ¶ç±»çš„æ–¹æ³•ï¼Œæ‰€ä»¥æœ€ç»ˆè¿è¡Œçš„æ˜¯excuMethod(5)æ–¹æ³•ã€‚
 		 */
 		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				excuMethod(3);
-			}
-		}){
+
 			@Override
 			public void run() {
 //				excuMethod(4);
 			}
+		}) {
+			@Override
+			public void run() {
+				// excuMethod(5);
+			}
 		}.start();
 	}
-	
-	private static void excuMethod(int flag){
-		while(true){
+
+	private static void excuMethod(int flag) {
+		while (true) {
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -62,5 +91,5 @@ public class TranditionThread {
 			System.out.println(flag + "  " + Thread.currentThread().getName());
 		}
 	}
-	
+
 }

@@ -1,7 +1,7 @@
 package resource.java.ordinary.mul.thread;
 /**
  * Ïß³Ì»¥³â£ºsynchronized
- * @author admin
+ * @author xiao
  *
  */
 public class TranditionThreadSynchronized {
